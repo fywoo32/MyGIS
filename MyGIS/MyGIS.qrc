@@ -1,0 +1,42 @@
+<RCC>
+    <qresource prefix="/MyGIS">
+        <file>icons/打开文档.png</file>
+        <file>icons/地图裁剪.png</file>
+        <file>icons/放大.png</file>
+        <file>icons/缓冲区.png</file>
+        <file>icons/加速.png</file>
+        <file>icons/减速.png</file>
+        <file>icons/漫游.png</file>
+        <file>icons/取消.png</file>
+        <file>icons/缩小.png</file>
+        <file>icons/添加数据.png</file>
+        <file>icons/统计.png</file>
+        <file>icons/凸包.png</file>
+        <file>icons/图层控制.png</file>
+        <file>icons/选择.png</file>
+        <file>icons/颜色通道.png</file>
+        <file>icons/影像专题图切图.png</file>
+        <file>icons/栅格分析.png</file>
+        <file>icons/执行.png</file>
+        <file>icons/直方图.png</file>
+        <file>icons/属性表.png</file>
+        <file>icons/地球.png</file>
+        <file>icons/line.png</file>
+        <file>icons/point.png</file>
+        <file>icons/polygon.png</file>
+        <file>icons/raster.png</file>
+        <file>icons/保存.png</file>
+        <file>icons/打开.png</file>
+        <file>icons/刷新.png</file>
+        <file>icons/color.png</file>
+        <file>icons/delete.png</file>
+        <file>icons/down.png</file>
+        <file>icons/up.png</file>
+        <file>icons/zoom.png</file>
+        <file>icons/icon_逆时针旋转.png</file>
+        <file>icons/icon_顺时针旋转.png</file>
+        <file>icons/数据库,数据.png</file>
+        <file>icons/文本.png</file>
+        <file>icons/构建网络.png</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Data>
+	<DataSource>
+		<SourceFilepath>
+			<LandCoverFilepath>F:/temp/LandCover</LandCoverFilepath>
+			<AuxiliaryDataFilepath>F:/temp/buffer/</AuxiliaryDataFilepath>
+			<OutputFilepath>F:/temp/</OutputFilepath>
+		</SourceFilepath>
+		
+		<LandCoverFiles Filenum="3">
+			<ClassifiCode>land_type_code.csv</ClassifiCode>
+			<File>
+				<Filepath>china_1995_1000m.tif</Filepath>
+				<Year>1995</Year>
+				<!-- no need -->
+				<Filetype>Geotiff</Filetype>					
+			</File>
+			<File>
+				<Filepath>china_2000_1000m.tif</Filepath>
+				<Year>2000</Year>
+				<!-- no need -->
+				<Filetype>Geotiff</Filetype>
+			</File>
+			<File>
+				<Filepath>china_2005_1000m.tif</Filepath>
+				<Year>2005</Year>
+				<!-- no need -->
+				<Filetype>Geotiff</Filetype>
+			</File>
+		</LandCoverFiles>
+
+		<!-- cal. prob. version 2.0. "filenum" can control input file from 0 to (filenum-1) -->
+		<AuxiliaryDataFiles Filenum ="5" TotalFileNum="5">
+			<File id ="0">
+				<Comment>China_Capitan_City_Distance_1000m</Comment>
+				<Filepath>China_Capitan_City_Distance_1000m.tif</Filepath>
+				<MinimumValue>0</MinimumValue>
+				<MaximumValue>2030410.5</MaximumValue>
+				<MeanValue>623146.0346</MeanValue>
+				<NearBetter>1</NearBetter>
+			</File>
+
+			<File id="1">
+				<Comment>China_Prefecture_City_Distance_1000m</Comment>
+				<Filepath>China_Prefecture_City_Distance_1000m.tif</Filepath>
+				<MinimumValue>0</MinimumValue>
+				<MaximumValue>1871343</MaximumValue>
+				<MeanValue>354775.3577</MeanValue>
+				<NearBetter>1</NearBetter>
+			</File>
+
+			<File id="2">
+				<Comment>China_County_Town_Distance_1000m</Comment>
+				<Filepath>China_County_Town_Distance_1000m.tif</Filepath>
+				<MinimumValue>0</MinimumValue>
+				<MaximumValue>1640138.625</MaximumValue>
+				<MeanValue>269124.3711</MeanValue>
+				<NearBetter>1</NearBetter>
+			</File>
+
+			<File id="3">
+				<Comment>China_All_Road_Distance_1000m</Comment>
+				<Filepath>China_All_Road_Distance_1000m.tif</Filepath>
+				<MinimumValue>0</MinimumValue>
+				<MaximumValue>1625834</MaximumValue>
+				<MeanValue>226602.4736</MeanValue>
+				<NearBetter>1</NearBetter>
+			</File>
+
+			<File id="4">
+				<Comment>China_Main_Railway_Distance_1000m</Comment>
+				<Filepath>China_Main_Railway_Distance_1000m.tif</Filepath>
+				<MinimumValue>0</MinimumValue>
+				<MaximumValue>2566221.75</MaximumValue>
+				<MeanValue>540725.3056</MeanValue>
+				<NearBetter>1</NearBetter>
+			</File>				
+		</AuxiliaryDataFiles>
+		
+		<!--main output-->
+		<OutputFiles>
+			<UrbanChangeFilepath>0UrbanChangeFile.tif</UrbanChangeFilepath>
+			<UrbanReclassifiFilepath>1UrbanReclassiFile.tif</UrbanReclassifiFilepath>
+			<LandDevelopSuitableIndexFilepath>2LandDevelopSuitableIndexFile.tif</LandDevelopSuitableIndexFilepath>
+			<RegressionAnalysisPointsFile>3RegressionAnalysisPointsFile.txt</RegressionAnalysisPointsFile>
+			<ProbabilityDevelopedAllFilepath>4UrbanDevelopeProbabilityFile.tif</ProbabilityDevelopedAllFilepath>	
+				
+			<!-- Please Do Not Put Suffix Name In This Node Value -->
+			<UrbanDevelopmentCAIterationsResult>5UrbanDevelopmentCAIterationsResult</UrbanDevelopmentCAIterationsResult>
+			
+			<!-- Image Reclassification For Validation -->
+			<UrbanReclassifiFilepath_Validation>1UrbanReclassiFile_Validation.tif</UrbanReclassifiFilepath_Validation>
+			
+			<!-- ****IMPORTANT**** -->
+			<!-- Output 9 Bands Probability Or Not, <=0 No, >0 Yes -->
+			<IsOutput9BandsProbabiltyImage>0</IsOutput9BandsProbabiltyImage>
+			<Op9BandsProbabilityFilepath>9Bands_UrbanDevelopeProbabilityFile.tif</Op9BandsProbabilityFilepath>				
+		</OutputFiles>		
+	</DataSource>
+
+	<Parameters>
+		<Simulation>
+			<MaxThreadNum>8</MaxThreadNum>
+			<StartYear>2000</StartYear>
+			<EndYear>2005</EndYear>
+			<YearGap>5</YearGap>
+			
+			<!-- The Minmum Number Of Random Points Used To Train Decision Forests -->
+			<RandomPointsNum>12000</RandomPointsNum>
+			
+			<!-- 	1 uncity TO city	
+					2 city TO city 
+					3 protective area TO city
+					4 uncity, protective area TO city
+					5 uncity, city, protective area TO city
+					6 Protective area TO city
+					7 city TO uncity
+					-->
+			<ProbabilityType>1</ProbabilityType>
+
+			<!-- ****IMPORTANT**** -->
+			<!-- 0 Random Forests
+				 1 Logic Regression 
+				 2 Neural Network   
+				 3 Immune Algorithm -->
+			<RegressionMethod>0</RegressionMethod>			
+		</Simulation>
+		
+		<RandomDecisionForest>			
+			<!-- Tree Number of Decision Forest, 50-100 -->
+			<DecisionForestTrees>80</DecisionForestTrees>
+			<!--percent of a training set used to build individual trees. Avail = (0, 1], Recommend = [0.1, 0.66]-->
+			<DecisionForestSetPersent>0.4</DecisionForestSetPersent>
+			<!-- number of variables used when choosing best split -->
+			<DecisionForestNRndVars>1000</DecisionForestNRndVars>
+			<!-- Decision Forest Output Result Data Filepath -->
+			<DecisionForestResultData>DecisionForestAccuracyReport.txt</DecisionForestResultData>
+		</RandomDecisionForest>
+		
+		<LogicRegression>
+			<!--Trained Model File Path / Pre Model File Path-->
+			<ModelFilepath>logicRegressionTrainingFile.mod</ModelFilepath>
+			<!-- Minmal Accuracy To Next Step (Make Probability Image). -->
+			<MinAccuracyToPass>0.3</MinAccuracyToPass>
+			<!-- maximal iteration loops (default 100) -->
+			<MaxLoop>100</MaxLoop>
+			<!-- minimal loss value decrease (default 1e-03) -->
+			<LossThread>0.001</LossThread>
+			<!-- learning rate (default 1.0) -->
+			<LearnRate>1.0</LearnRate>
+			<!-- lambda of gaussian prior regularization (default 0) -->
+			<Lambda>0.0</Lambda>
+			<!-- 0: final weight (default); 1: average weights of all iteration loops -->
+			<AvgLoopWeight>0</AvgLoopWeight>
+			<!-- 0: initial training model (default); 1: updating model (pre_model_file is needed) -->
+			<UpdateModelFile>0</UpdateModelFile>
+		</LogicRegression>
+		
+		<NeuralNetwork>
+			<!-- ****IMPORTANT**** -->
+			<!-- NN Hidden Level Num -->
+			<HiddenLevelNum>10</HiddenLevelNum>
+			<!-- Restart Times, >0 Choose The Best NN, =0 Current State NN -->
+			<RestartsNum>10</RestartsNum>
+			<!-- NN Accuracy Report -->
+			<AccuracyReport>NeuralNetworkAccuracyReport.txt</AccuracyReport>
+		</NeuralNetwork>
+
+		<ImmuneAlgorithm>
+			<!-- Order num of classifier, recommondation = 1 -->
+			<ClassifierOrder>1</ClassifierOrder>
+			<!-- Number of antibodies -->
+			<AntibodiesNumber>200</AntibodiesNumber>
+			<!-- Variation probability -->
+			<VariationPg>0.6</VariationPg>
+			<!-- Exhange probability -->
+			<ExchangePg>0.6</ExchangePg>
+			<!-- Training iteration number, recommendation: 10000 -->
+			<TrainingIterationNum>300000</TrainingIterationNum>
+			<!-- Training accuracy report -->
+			<AccuracyReport>ImmuneAlogrithmAccuracyReport.txt</AccuracyReport>
+		</ImmuneAlgorithm>
+
+		<CAIteration>
+			<!-- Urban Pixels Increase Number, if > 0 && > MaxIterationNum, the program just simulate to the increase num.  -->
+			<!-- If this parameter <= 0, the whole image simulation and prediction -->
+			<UrbanIncreaseNum>100000</UrbanIncreaseNum>
+			<!-- Whether using the fast method to Urban Increase, <=0 No, >0 Yes -->
+			<UrbanIncreaseFastMethod>1</UrbanIncreaseFastMethod>
+			<!-- The Times of Finding Random Points per time -->
+			<FindRndPtsRestartTimes>5000</FindRndPtsRestartTimes>
+			
+			<!-- Maximum Iteration Num, remcommodation: 30-50 -->
+			<MaxIterationNum>100</MaxIterationNum>
+			
+			<!-- Fore CA and Next CA Result Difference, recommodation: 300-800 -->
+			<ForeNextDifferenceNum>0</ForeNextDifferenceNum>
+			<!-- The Minumum Probability To Development, RDF Recommend = [0.6, 0.9], LR Recommend = [0.1, 0.3] -->
+			<UrbanDevelopedProbability>0.5</UrbanDevelopedProbability>
+			<!-- Simulating Protective Area Or Not, <=0 No, >0 Yes -->
+			<IsSimulateProtectiveArea>0</IsSimulateProtectiveArea>
+			<!-- Calculating Neighbor Probability Use Probability Image, <=0 No, >0 Yes -->
+			<IsUseProbImgCalNeighborProb>1</IsUseProbImgCalNeighborProb>
+			<!-- Next CA Iteration Use Fore Probability Result, <=0 No, >0 Yes -->
+			<IsUseForeProbImgToIteration>0</IsUseForeProbImgToIteration>
+		</CAIteration>
+		
+		<!-- ****IMPORTANT**** -->
+		<AccuracyEvaluation>
+			<!-- Execute this process or not, >=1 do, <=0 un-do -->
+			<ValidProcess>0</ValidProcess>
+			<!-- Source File -->
+			<SourceUrbanReclassifyFile>F:\temp\1UrbanReclassiFile.tif</SourceUrbanReclassifyFile>
+			<!-- Validation File -->
+			<TargetUrbanReclassifyFile>F:\temp\1UrbanReclassiFile_Validation.tif</TargetUrbanReclassifyFile>
+			<!-- China Vector File -->
+			<MapFile>F:/temp/中国县界/中国县界.shp</MapFile>		
+			<!-- CA Result Filename, Do Not Add Suffix Name. The Filename Must Append "_IterNo_*.tif", * = Interation Time -->
+			<CAResultFiles>F:\temp\5UrbanDevelopmentCAIterationsResult</CAResultFiles>
+			<!-- CA Result Filename, Do Not Add Suffix Name. The Filename Must Append "_IterNo_*.accu", * = Interation Time. or ".statics" -->
+			<AccuResultFiles>F:\temp\5UrbanDevelopmentCAIterationsResult</AccuResultFiles>		
+		</AccuracyEvaluation>
+		
+		<FarmlandAnalysis>
+			<!-- Execute this process or not, >=1 do, <=0 un-do -->
+			<ValidProcess>0</ValidProcess>
+			<!-- ****IMPORTANT**** -->
+			<!-- Original Land Cover Classification Image -->
+			<ClassifiImageFilename>F:/temp/LandCover/china_2000_1000m.tif</ClassifiImageFilename>
+			<!-- Farmland Code, Use ',' To Split -->
+			<FarmlandCode>11,12</FarmlandCode>
+			<!--CA Result Filename, Do Not Add Suffix Name. The Filename Must Append "_IterNo_*.tif", * = Interation Time -->
+			<CAResultFiles>F:\temp\5UrbanDevelopmentCAIterationsResult</CAResultFiles>
+			<!--Farmland Analysis Result Filename, Do Not Add Suffix Name. The Filename Must Append "_IterNo_*.tif", * = Interation Time, Same As CAResult File. -->
+			<AnalysisResultFiles>F:\temp\7FarmLandAnalysis</AnalysisResultFiles>
+		</FarmlandAnalysis>	
+	</Parameters>	
+</Data>

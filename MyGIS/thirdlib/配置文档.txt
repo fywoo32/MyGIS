@@ -1,0 +1,12 @@
+环境要求：VS2019 (Debug/Release x64)
+
+本次实验提供的参考库文件如下：
+GDAL2.0.2（空间数据处理库）https://gdal.org
+libxml2（XML读写库）https://github.com/GNOME/libxml2
+proj-9.3.0（投影库）https://proj.org/en/9.3/development/reference/cpp/index.html
+RapidJSON（JSON读写库）https://github.com/Tencent/rapidjson
+log4cpp-1.1.4（日志库）https://log4cpp.sourceforge.net
+
+GDAL、libxml2、proj，log4cpp库均由CMake生成，想要学习的同学可以看教程（https://blog.csdn.net/m0_61812914/article/details/127952081）。使用时，需在VS2019中引入lib和include等文件夹，方可使用，具体参考视频见“第三方库配置教学视频.mp4”。
+
+其中RapidJSON库是只有头文件的C++库，中文参考文档（http://rapidjson.org/zh-cn/），使用时，只需把include/rapidjson目录复制到系统或项目的include目录中即可使用。
